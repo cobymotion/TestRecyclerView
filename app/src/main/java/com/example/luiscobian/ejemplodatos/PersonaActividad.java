@@ -1,5 +1,6 @@
 package com.example.luiscobian.ejemplodatos;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,11 +23,6 @@ public class PersonaActividad extends AppCompatActivity {
         setContentView(R.layout.ventana_principal);
 
         rv = (RecyclerView) findViewById(R.id.rv);
-        //TODO: Provisional para quitarlo despues
-        bd.add(new Persona("Prueba", "Telefono Prueba"));
-        bd.add(new Persona("Prueba", "Telefono Prueba"));
-        bd.add(new Persona("Prueba", "Telefono Prueba"));
-        bd.add(new Persona("Prueba", "Telefono Prueba"));
 
         FloatingActionButton boton = (FloatingActionButton)
                  findViewById(R.id.addActivity);
@@ -34,14 +30,20 @@ public class PersonaActividad extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PersonaActividad.this, "prueba",
-                             Toast.LENGTH_LONG).show();
+                Intent i = new Intent(PersonaActividad.this, AgregarActividad.class);
+                startActivity(i);
             }
         });
 
 
         actualizaRecycler();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        actualizaRecycler();
     }
 
     private void actualizaRecycler() {
