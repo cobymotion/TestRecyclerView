@@ -1,5 +1,7 @@
 package com.example.luiscobian.ejemplodatos;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +29,12 @@ public class AgregarActividad extends AppCompatActivity {
                 Persona persona = new Persona(texto1.getText().toString(),
                         texto2.getText().toString());
                 PersonaActividad.bd.add(persona);
+                BaseContactos bdHelper = new BaseContactos(AgregarActividad.this);
+                SQLiteDatabase bd = bdHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("nombre",texto1.getText().toString());
+                values.put("telefono",texto2.getText().toString());
+                bd.insert("contacto",null, values);
                 finish();
 
             }
